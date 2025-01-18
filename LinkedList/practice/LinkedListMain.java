@@ -77,13 +77,14 @@ class LinkedList{
 	
 	//Prepend Node
 	public void prepend(int value){
+		Node newNode = new Node(value);
 		if(length == 0){
-			append(value);
+			head = newNode;
+			tail = newNode;
 		}
 		else{
-			Node temp = new Node(value);
-			temp.next = head.next;
-			head = temp;
+			newNode.next = head;
+			head = newNode;
 			length++;
 		}
 	}
@@ -93,9 +94,9 @@ class LinkedList{
 		if(length == 0) return null;
 		Node temp = head;
 		head = head.next;
-		length --;
+		temp.next = null;
+		length--;
 		if(length == 0){
-			head = null;
 			tail = null;
 		}
 		return temp;
@@ -158,6 +159,21 @@ class LinkedList{
 		return temp;
 	}
 	
+	//Reverse List
+	public void reverse(){
+		Node temp = head;
+		head = tail;
+		tail = temp;
+		Node after = temp.next;
+		Node before = null;
+		for(int i=0; i<length; i++){
+			after = temp.next;
+			temp.next = before;
+			before = temp;
+			temp = after;
+		}
+	}
+	
 }
 
 class LinkedListMain{
@@ -171,9 +187,11 @@ class LinkedListMain{
 		linkedList.prepend(7);
 		linkedList.removeFirst();
 		System.out.println(linkedList.get(2));
-		System.out.println(linkedList.set(2, 15));
+		System.out.println(linkedList.set(1, 15));
 		linkedList.insert(1, 18);
 		linkedList.remove(2);
+		linkedList.printList();
+		linkedList.reverse();
 		linkedList.printList();
 	}
 }
