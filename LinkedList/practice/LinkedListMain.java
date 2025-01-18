@@ -74,6 +74,55 @@ class LinkedList{
 		}
 		return temp;
 	}
+	
+	//Prepend Node
+	public void prepend(int value){
+		if(length == 0){
+			append(value);
+		}
+		else{
+			Node temp = new Node(value);
+			temp.next = head.next;
+			head = temp;
+			length++;
+		}
+	}
+	
+	//Remove First
+	public Node removeFirst(){
+		if(length == 0) return null;
+		Node temp = head;
+		head = head.next;
+		length --;
+		if(length == 0){
+			head = null;
+			tail = null;
+		}
+		return temp;
+	}
+	
+	//Get Node
+	public Node get(int index){
+		if(index < 0 || index >= length) return null;
+		Node temp = head;
+		for(int i=0; i<index; i++){
+			temp = temp.next;
+		}
+		return temp;
+	}
+	
+	//Set Node
+	public boolean set(int index, int value){
+		if(index < 0 || index >= length) return false;
+		Node temp = head;
+		for(int i=0; i<index; i++){
+			temp = temp.next;
+		}
+		temp.value = value;
+		return true;
+	}
+	
+	
 }
 
 class LinkedListMain{
@@ -82,7 +131,12 @@ class LinkedListMain{
 		linkedList.append(8);
 		linkedList.append(9);
 		linkedList.append(10);
+		linkedList.append(11);
 		System.out.println(linkedList.removeLast());
+		linkedList.prepend(7);
+		linkedList.removeFirst();
+		System.out.println(linkedList.get(2));
+		System.out.println(linkedList.set(2, 15));
 		linkedList.printList();
 	}
 }
