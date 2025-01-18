@@ -122,6 +122,41 @@ class LinkedList{
 		return true;
 	}
 	
+	//Insert Node
+	public boolean insert(int index, int value){
+		if(index < 0 || index > length) return false;
+		if(index == 0){
+			prepend(value);
+			return true;
+		}
+		if(index == length){
+			append(value);
+			return true;
+		}
+		Node temp = get(index - 1);
+		Node newNode = new Node(value);
+		newNode.next = temp.next;
+		temp.next = newNode;
+		length++;
+		return true;
+	}
+	
+	//Remove Node
+	public Node remove(int index){
+		if(index < 0 || index > length) return null;
+		if(index == 0){
+			return removeFirst();
+		}
+		if(index == length){
+			return removeLast();
+		}
+		Node prev = get(index - 1);
+		Node temp = prev.next;
+		prev.next = temp.next;
+		temp.next = null;
+		length--;
+		return temp;
+	}
 	
 }
 
@@ -137,6 +172,8 @@ class LinkedListMain{
 		linkedList.removeFirst();
 		System.out.println(linkedList.get(2));
 		System.out.println(linkedList.set(2, 15));
+		linkedList.insert(1, 18);
+		linkedList.remove(2);
 		linkedList.printList();
 	}
 }
