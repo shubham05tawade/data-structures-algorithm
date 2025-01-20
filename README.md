@@ -3,3 +3,4 @@
 <p>Data Structure and Algorithm in JAVA</p>
 
 <li>LinkedList</li>
+<li>Doubly LinkedList</li>
