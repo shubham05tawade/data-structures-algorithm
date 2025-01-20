@@ -38,6 +38,36 @@ class DoublyLinkedList{
 			temp = temp.next;
 		}
 	}
+	
+	//Append Node
+	public void append(int value){
+		Node newNode = new Node(value);
+		if(length == 0){
+			head = newNode;
+			tail = newNode;
+		}
+		else{
+			tail.next = newNode;
+			newNode.prev = tail;
+			tail = newNode;
+		}
+		length++;
+	}
+	
+	//Remove Last
+	public Node removeLast(){
+		if(length == 0) return null;
+		Node temp = tail;
+		if(length == 0){
+			head = null;
+			tail = null;
+		}
+		tail = tail.prev;
+		tail.next = null;
+		temp.prev = null;
+		length--;
+		return temp;
+	}
 }
 
 class DoublyLinkedListMain{
@@ -45,6 +75,10 @@ class DoublyLinkedListMain{
 		DoublyLinkedList doublyLinkedList = new DoublyLinkedList(7);
 		System.out.println("Head: " + doublyLinkedList.getHead());
 		System.out.println("Tail: " + doublyLinkedList.getTail());
+		doublyLinkedList.append(8);
+		doublyLinkedList.append(9);
+		doublyLinkedList.append(10);
+		doublyLinkedList.removeLast();
 		doublyLinkedList.printList();
 	}
 }
