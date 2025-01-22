@@ -45,10 +45,10 @@ class LinkedList{
 		if(head == null || k < 0) return null;
 		Node temp = head;
 		Node nextNode = null;
-		while(temp.next != null){
+		while(temp != null){
 			nextNode = temp;
 			int count = 1;
-			while(nextNode.next != null){
+			while(nextNode != null && nextNode.next != null){
 				nextNode = nextNode.next;
 				count++;
 			}
@@ -77,6 +77,6 @@ class LinkedListKthNodeFromEnd{
 		int[] input = {1 ,2 ,3, 4, 5, 6, 7};
 		LinkedList linkedList = new LinkedList(input);
 		linkedList.printList();
-		System.out.println(linkedList.findKthFromEnd(2).value);
+		System.out.println(linkedList.findKthFromEnd(7).value);
 	}
 }
