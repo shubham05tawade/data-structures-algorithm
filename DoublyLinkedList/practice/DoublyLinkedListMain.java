@@ -54,7 +54,7 @@ class DoublyLinkedList{
 		length++;
 	}
 	
-	//Remove Last
+	//Remove Last Node
 	public Node removeLast(){
 		if(length == 0) return null;
 		Node temp = tail;
@@ -69,6 +69,7 @@ class DoublyLinkedList{
 		return temp;
 	}
 	
+	//Prepend Node
 	public void prepend(int value){
 		Node newNode = new Node(value);
 		if(length == 0){
@@ -85,6 +86,7 @@ class DoublyLinkedList{
 		length++;
 	}
 	
+	//Remove Last Node
 	public Node removeFirst(){
 		if(length == 0) return null;
 		Node temp = head;
@@ -100,6 +102,35 @@ class DoublyLinkedList{
 		length--;
 		return temp;
 	}
+	
+	//Get Node
+	public Node get(int index){
+		if(index < 0 || index >= length) return null;
+		if(index < length/2){
+			Node temp = head;
+			for(int i=0; i<index; i++){
+				head = head.next;
+			}
+			return head;
+		}
+		else{
+			Node temp = tail;
+			for(int i= length -1; i > index ; i--){
+				tail = tail.prev;
+			}
+			return tail;
+		}
+	}
+	
+	//Set Node
+	public boolean set(int index, int value) {
+		Node temp = get(index);
+		if(temp != null){
+			temp.value = value;
+			return true;
+		}
+		return false;
+	}
 }
 
 class DoublyLinkedListMain{
@@ -113,6 +144,8 @@ class DoublyLinkedListMain{
 		doublyLinkedList.removeLast();
 		doublyLinkedList.prepend(6);
 		doublyLinkedList.removeFirst();
+		System.out.println(doublyLinkedList.get(1).value);
+		doublyLinkedList.set(2, 17);
 		doublyLinkedList.printList();
 	}
 }
