@@ -2,8 +2,7 @@ import java.util.*;
 
 class LinkedList{
 	private Node head;
-	private Node headResult = null;
-	private Node result = null;
+	int length;
 	
 	class Node{
 		int value;
@@ -28,51 +27,29 @@ class LinkedList{
 				}
 				temp.next = newNode;
 			}
+			length++;
 		}
 	}
 	
-	//Remove Duplicate from List
 	public void removeDuplicates(){
-		
-		Node headTemp = head;
-		while(headTemp != null){
-			if(!valuePresentInUniqueLinkedList(headTemp.value)){
-				createUniqueLinkedList(headTemp.value);
+		HashSet<Integer> uniqueHashSet = new HashSet<Integer>();
+		Node prev = null;
+		Node current = head;
+		while(current != null){
+			if(uniqueHashSet.contains(current.value)){
+				prev.next = current.next;
+				length--;
 			}
-			headTemp = headTemp.next;
-		}
-		Node tempResult = headResult;
-		while(tempResult != null){
-			System.out.println(tempResult.value);
-			tempResult = tempResult.next;
-		}
-	}
-	
-	//Check if value is present in the unique linked list
-	public boolean valuePresentInUniqueLinkedList(int value){
-		if(result != null && headResult != null){
-			Node temp = headResult;
-			while(temp != null){
-				if(temp.value == value) return true;
-				temp = temp.next;
+			else{
+				prev = current;
+				uniqueHashSet.add(current.value);
 			}
-			return false;
+			current = current.next;
 		}
-		return false;
-	}
-	
-	//append value in the unique linked list
-	public void createUniqueLinkedList(int value){
-		Node newNode = new Node(value);
-		if(result != null){
-			while(result.next != null){
-				result = result.next;
-			}
-			result.next = newNode;
-		}
-		else{
-			result = newNode;
-			headResult = newNode;
+		Node temp = head;
+		while(temp != null){
+			System.out.println(temp.value);
+			temp = temp.next;
 		}
 	}
 	

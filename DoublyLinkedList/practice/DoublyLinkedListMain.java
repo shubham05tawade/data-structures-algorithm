@@ -131,6 +131,48 @@ class DoublyLinkedList{
 		}
 		return false;
 	}
+	
+	//Insert Node
+	public boolean insert(int index, int value){
+		if(index < 0 || index > length) return false;
+		if(index == 0){
+			prepend(value);
+		}
+		else if(index == length){
+			append(value);
+		}
+		else{
+			Node newNode = new Node(value);
+			Node before = get(index - 1);
+			Node after = before.next;
+			newNode.next = after;
+			newNode.prev = before;
+			after.prev = newNode;
+			before.next = newNode; 
+			length++;
+		}
+		return true;
+	}
+	
+	//Remove Node
+	public Node remove(int index){
+		if(index < 0 || index >= length) return null;
+		if(index == 0){
+			return removeFirst();
+		}
+		else if(index == length - 1){
+			return removeLast();
+		}
+		else{
+			Node temp = get(index);
+			temp.next.prev = temp.prev;
+			temp.prev.next = temp.next;
+			temp.next = null;
+			temp.prev = null;
+			length--;
+			return temp;
+		}
+	}
 }
 
 class DoublyLinkedListMain{
@@ -141,11 +183,16 @@ class DoublyLinkedListMain{
 		doublyLinkedList.append(8);
 		doublyLinkedList.append(9);
 		doublyLinkedList.append(10);
+		doublyLinkedList.append(11);
+		doublyLinkedList.append(12);
+		doublyLinkedList.append(13);
 		doublyLinkedList.removeLast();
 		doublyLinkedList.prepend(6);
 		doublyLinkedList.removeFirst();
-		System.out.println(doublyLinkedList.get(1).value);
+		System.out.println("Get Value at index 1: "+ doublyLinkedList.get(1).value);
 		doublyLinkedList.set(2, 17);
+		doublyLinkedList.insert(1, 4);
+		System.out.println("Remove Node: "+ doublyLinkedList.remove(1));
 		doublyLinkedList.printList();
 	}
 }
