@@ -45,20 +45,28 @@ class DoublyLinkedList{
 		length++;
 	}
 	
-	public void swapFirstAndLast(){
-		if (length < 2) return;
-		int temp = head.value;
-		head.value = tail.value;
-		tail.value = temp;
+	//Swap prev and next pointer for reversing the doubly linked list
+	public void reverse(){
+		if(length < 2) return;
+		Node temp = head;
+		head = tail;
+		tail = temp;
+		Node tempAfter = temp;
+		while(tempAfter != null){
+			tempAfter = temp.next;
+			temp.next = temp.prev;
+			temp.prev = tempAfter;
+			temp = tempAfter;
+		}
 	}
 	
 }
 
-class DoublyLinkedListSwapFirstAndLast{
+class DoublyLinkedListReverse{
 	public static void main(String args[]){
 		int values[] = {1, 3, 5, 7, 9}; 
 		DoublyLinkedList doublyLinkedList = new DoublyLinkedList(values);
-		doublyLinkedList.swapFirstAndLast();
+		doublyLinkedList.reverse();
 		doublyLinkedList.printList();
 	}
 }
