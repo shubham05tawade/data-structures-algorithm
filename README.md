@@ -4,3 +4,4 @@
 
 <li>LinkedList</li>
 <li>Doubly LinkedList</li>
+<li>Stack</li>
