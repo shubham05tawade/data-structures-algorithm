@@ -6,3 +6,4 @@
 <li>Doubly LinkedList</li>
 <li>Stack</li>
 <li>Queue</li>
+<li>Trees</li>
