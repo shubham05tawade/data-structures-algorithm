@@ -7,3 +7,4 @@
 <li>Stack</li>
 <li>Queue</li>
 <li>Trees</li>
+<li>Hash Tables</li>
