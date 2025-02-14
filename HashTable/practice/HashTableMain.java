@@ -1,3 +1,5 @@
+import java.util.*;
+
 class HashTable{
 	
 	private int size = 7;
@@ -53,14 +55,38 @@ class HashTable{
 			temp.next = newNode;
 		}
 	}
+	
+	public int get(String key){
+		int index = hash(key);
+		Node temp = dataMap[index];
+		while(temp != null){
+			if(temp.key == key) return temp.value;
+			temp = temp.next;
+		}
+		return 0;
+	}
+	
+	//Get All keys
+	public ArrayList keys(){
+		ArrayList<String> keys = new ArrayList<String>();
+		for(int i=0; i<dataMap.length; i++){
+			Node temp = dataMap[i];
+			while(temp != null){
+				keys.add(temp.key);
+				temp = temp.next;
+			}
+		}
+		return keys;
+	}
 }
 
 class HashTableMain{
 	public static void main(String[] args){
 		HashTable hashTable = new HashTable();
 		hashTable.set("hello", 123);
-		hashTable.set("hello", 456);
 		hashTable.set("world", 876);
 		hashTable.printTable();
+		System.out.println(hashTable.get("hello"));
+		System.out.println(hashTable.keys());
 	}
 }
