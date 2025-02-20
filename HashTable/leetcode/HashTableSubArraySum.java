@@ -21,6 +21,7 @@ class HashTableSubArraySum{
 					result[1] = counter - 1;
 					return;
 				}
+				//calculate sum
 				if(counter < input.length)
 				    sum = sum + input[counter];
 				counter++;
