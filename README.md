@@ -8,3 +8,4 @@
 <li>Queue</li>
 <li>Trees</li>
 <li>Hash Tables</li>
+<li>Graphs</li>
