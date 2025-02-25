@@ -29,6 +29,30 @@ class Graph{
 		System.out.println(adjList);
 	}
 	
+	//remove edge
+	public boolean removeEdge(String vertex1, String vertex2){
+		if(adjList.get(vertex1) != null && adjList.get(vertex2) != null){
+			adjList.get(vertex1).remove(vertex2);
+			adjList.get(vertex2).remove(vertex1);
+			return true;
+		}
+		return false;
+	}
+	
+	//remove vertex
+	public boolean removeVertex(String vertex){
+		//check if vertex exist
+		if(adjList.get(vertex) != null){
+			//Remove all the edge from vertices that connects to vertex
+			for(String adjVertex: adjList.get(vertex)){
+				adjList.get(adjVertex).remove(vertex);
+			}
+			//Remove vertex
+			adjList.remove(vertex);
+			return true;
+		}
+		return false;
+	}
 }
 
 public class GraphMain{
@@ -36,7 +60,14 @@ public class GraphMain{
 		Graph graph = new Graph();
 		graph.addVertex("A");
 		graph.addVertex("B");
+		graph.addVertex("C");
+		graph.addVertex("D");
 		graph.addEdge("A", "B");
+		graph.addEdge("C", "B");
+		graph.addEdge("C", "D");
+		graph.addEdge("D", "A");
+		graph.removeEdge("C", "D");
+		graph.removeVertex("A");
 		graph.printGraph();
 	}
 }
