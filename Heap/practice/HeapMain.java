@@ -43,9 +43,50 @@ class Heap{
 		}
 	}
 	
+	public void sinkDown(int index){
+		int maxIndex = index;
+		while(true){
+			int leftIndex = heap.get(index);
+			int rightIndex = heap.get(index);
+			
+			//check if leftchild has value greater than parent 
+			if(leftIndex < heap.size() && heap.get(leftIndex) > heap.get(maxIndex)){
+				maxIndex = leftIndex;
+			}
+			//check if rightchild has value greater than parent
+			if(rightIndex < heap.size() && heap.get(rightIndex) > heap.get(maxIndex)){
+				maxIndex = rightIndex;
+			}
+			//if any child has value greater than parent then perform swap operation
+			if(maxIndex != index){
+				swap(maxIndex, index);
+				index = maxIndex;
+			}
+			//if the parent node is greater than left and right child that mean we have highest node on top so end the loop
+			else{
+				return;
+			}
+		}
+	}
+	
+	public Integer remove(){
+		if(heap.size() == 0) return null;
+		if(heap.size() == 1){
+			return heap.remove(0);
+		}
+		//Always remove top most node from heap
+		int max = heap.get(0);
+		//Replace the first node with last node
+		heap.set(0, heap.remove(heap.size() - 1));
+		//using this method to bring the highest node on top again
+		sinkDown(0);
+		return max;
+	}
+	
 	public void printHeap(){
 		System.out.println(heap);
 	}
+	
 }
 
 public class HeapMain{
@@ -58,6 +99,7 @@ public class HeapMain{
 		heap.insert(66);
 		heap.insert(86);
 		heap.insert(99);
+		heap.remove();
 		heap.printHeap();
 	}
 }
