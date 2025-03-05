@@ -95,6 +95,54 @@ class BinarySearchTree{
 		if(root == null) root = new Node(value);
 		rInsert(root, value);
 	}
+	
+	public int minValue(Node node){
+		while(node.left != null){
+			node = node.left;
+		}
+		return node.value;
+	}
+	
+	public Node rDelete(Node node, int value){
+		//Return null if value isn't found in BST
+		if(node == null) return null;
+		//Traverse to left of BST if value is less than current node value
+		if(value < node.value){
+			node.left = rDelete(node.left, value);
+		}
+		//Traverse to left of BST if value is less than current node value
+		else if(value > node.value){
+			node.right = rDelete(node.right, value);
+		}
+		else{
+			//Return null if left and right node of current node is null
+			if(node.left == null && node.right == null){
+				return null;
+			}
+			//Set current node to right node if left node is null
+			else if(node.left == null){
+				node = node.right;
+			}
+			//Set current node to left node if right node is null
+			else if(node.right == null){
+				node = node.left;
+			}
+			else{
+				//Get Minimum value from the right node's subtree
+				int subTreeMin = minValue(node.right);
+				//Replace the current node value with minValue
+				node.value = subTreeMin;
+				//Delete node
+				node.right = rDelete(node.right, subTreeMin);
+			}
+		}
+		return node;
+	}
+	
+	//Get value to delete
+	public void rDelete(int value){
+		rDelete(root, value);
+	}
 }
 
 class BinarySearchTreeMain{
@@ -112,6 +160,8 @@ class BinarySearchTreeMain{
 		System.out.println(binarySearchTree.contains(50));
 		System.out.println(binarySearchTree.contains(60));
 		System.out.println(binarySearchTree.rContains(51));
+		System.out.println(binarySearchTree.rContains(41));
+		binarySearchTree.rDelete(41);
 		System.out.println(binarySearchTree.rContains(41));
 	}
 }
