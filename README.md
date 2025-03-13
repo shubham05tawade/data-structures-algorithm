@@ -9,3 +9,4 @@
 <li>Trees</li>
 <li>Hash Tables</li>
 <li>Graphs</li>
+<li>Sorting</li>
